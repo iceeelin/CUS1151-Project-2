@@ -21,6 +21,11 @@ public class IntTree {
         overallRoot = buildTree(1, max);
     }
 
+    public IntTree(IntTreeNode node) 
+    {
+    	this.overallRoot = node;
+    }
+    
     // post: returns a sequential tree with n as its root unless
     //       n is greater than max, in which case it returns an
     //       empty tree
@@ -118,4 +123,85 @@ public class IntTree {
                  + matches(myRoot.right, otherRoot.right);
         }
     }
+    
+    public void printValsAtLevels(IntTreeNode root, int level) 
+    {
+    	if(null == root) 
+    	{
+    		return;
+    	}
+    	System.out.println(String.format("Val : %d, Level : %d", root.data, level));
+    	printValsAtLevels(root.left, level+1); 
+    	printValsAtLevels(root.right, level+1);
+    }
+    
+    public void printValsAtLevels() 
+    {
+    	printValsAtLevels(this.overallRoot, 1);
+    }
+    
+    
+    
+    /**
+     * @author Brendan Morgenstern
+     * @param root Root node of the tree to operate on 
+     * @param depth The current depth of the tree in the call
+     * @return Returns the sum of the data at each node multiplied by the depth
+     */
+    public int depthSum(IntTreeNode root, int depth) 
+    {
+    	if(null == root) 
+    	{
+    		return 0;
+    	}
+    	int sum = root.data * depth;
+    	
+    	sum += depthSum(root.left, depth+1); 
+    	sum += depthSum(root.right, depth+1);
+    	
+    	return sum;
+    }
+    
+    
+    /**
+     * @author Brendan Morgenstern
+     * @return Returns the sum of the data at every node in the tree multiplied by the depth
+     */
+    public int depthSum() 
+    {
+    	return depthSum(this.overallRoot, 1);
+    }
+    
+    /**
+     * @author Brendan Morgenstern
+     * @param root Root node of the tree to operate on 
+     * @param counter The current counted number of branches in the call
+     * @return Returns the number of non-leaf nodes that have even data
+     */
+    public int countEvenBranches(IntTreeNode root, int counter) 
+    {
+    	if (null == root) 
+    	{
+    		return counter;
+    	}
+    	if( ( !root.isLeaf() ) && ( root.data % 2 == 0) ) 
+    	{
+    		counter++;
+    	}
+    	counter = countEvenBranches(root.left,  counter);
+    	counter = countEvenBranches(root.right,  counter);
+    	
+    	return counter;
+    }
+    
+    /**
+     * @author Brendan Morgenstern
+     * @return Returns the number of non-leaf nodes in the tree that have even data
+     */
+    public int countEvenBranches() 
+    {
+    	return countEvenBranches(this.overallRoot, 0);
+    }
+    
+    
 }

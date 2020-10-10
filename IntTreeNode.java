@@ -18,4 +18,9 @@ public class IntTreeNode {
         this.left = left;
         this.right = right;
     }
+    
+    public boolean isLeaf() 
+    {
+    	return (null == this.right) && (null == this.left);
+    }
 }
