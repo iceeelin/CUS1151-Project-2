@@ -140,8 +140,79 @@ public class IntTree {
     	printValsAtLevels(this.overallRoot, 1);
     }
     
+    /**
+     * @author Ice Lin
+     * @param root Root node of the tree to operate on 
+     * @return the number of left children in the tree
+     */
+    public static int countLeftNodes(IntTreeNode root) {
+    	if (root == null) {
+    		return 0;
+    	}
+    	int count = 0;
+    	if(root.left != null) {
+    		count = 1;
+    	}
+    	return count + countLeftNodes(root.left) + countLeftNodes(root.right);
+    }
     
+    /**
+     * @author Ice Lin
+     * @return the number of left children in the tree
+     */
+    public int testCountLeftNodes() {
+    	return countLeftNodes(this.overallRoot);
+    }
     
+    /**
+     * @author Ice Lin
+     * @param root Root node of the tree 
+     * @return true is tree is empty, false if it is not empty
+     */
+    public boolean isEmpty() {
+    	if(overallRoot == null) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    /**
+     * @author Ice Lin
+     * @param root Root node of the tree to operate on 
+     * @return the number of empty branches in the tree
+     */
+    public static int countEmpty(IntTreeNode root) {
+    	if(root == null) {
+    		return 0;
+    	}
+    	if(root.isLeaf()) {
+    		return 2;
+    	}
+    	else {
+    		if(root.left == null || root.right == null) {
+    			return 1 + countEmpty(root.left) + countEmpty(root.right);
+    		}
+    		else {
+    			return countEmpty(root.left) + countEmpty(root.right);
+    		}
+    	}
+    }
+    
+    /**
+     * @author Ice Lin
+     * @return the number of empty branches in the tree
+     */
+    public int testCountEmpty() {
+    	if (this.isEmpty() == true) {
+    		return 1;
+    	}
+    	else {
+    		return countEmpty(this.overallRoot);
+    	}
+    }
+
     /**
      * @author Brendan Morgenstern
      * @param root Root node of the tree to operate on 
