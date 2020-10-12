@@ -15,6 +15,13 @@ public class IntTreeDemo {
         
         System.out.println();  System.out.println();
         
+        
+        /*Test Count Left Nodes*/
+        int leftNodeCount = t.testCountLeftNodes();
+        System.out.println("Number of Left Nodes: " + leftNodeCount);
+        /*Test Count Empty Branches*/
+        int emptyBranchCount = t.testCountEmpty();
+        System.out.println("Number of Empty Branches: " + emptyBranchCount);
         /*Test Depth Sum*/
         testDepthSum();
         /*Test Count Branches*/
